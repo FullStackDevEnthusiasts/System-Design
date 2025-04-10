@@ -57,3 +57,37 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 });
 
 app.listen(3000, () => console.log('Server running on port 3000'));
+
+const { BlockBlobClient } = require('@azure/storage-blob');
+const path = require('path');
+const crypto = require('crypto');
+
+const uploadToAzure = async (containerClient, fileStream, fileName, mimeType) => {
+  const blobName = `${Date.now()}-${crypto.randomBytes(6).toString('hex')}-${fileName}`;
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+  const uploadOptions = {
+    blobHTTPHeaders: {
+      blobContentType: mimeType || 'application/octet-stream'
+    },
+    onProgress: (ev) => {
+      console.log(`Uploaded ${ev.loadedBytes} bytes`);
+    },
+    maxSingleShotSize: 4 * 1024 * 1024, // 4MB
+    concurrency: 5,
+  };
+
+  await blockBlobClient.uploadStream(
+    fileStream,
+    4 * 1024 * 1024, // buffer size
+    20, // max concurrency
+    uploadOptions
+  );
+
+  return blockBlobClient.url;
+};
+
+module.exports = uploadToAzure;
+
+
+
