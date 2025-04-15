@@ -1,93 +1,18 @@
-const express = require('express');
-const multer = require('multer');
-const blobServiceClient = require('./blobService');
-const uploadToAzure = require('./uploadController');
+// utils/cleanFields.js
 
-const app = express();
-const upload = multer();
-
-app.post('/upload', upload.single('file'), async (req, res) => {
-  try {
-    const containerClient = blobServiceClient.getContainerClient('my-container');
-
-    // Ensure the container exists
-    await containerClient.createIfNotExists({ access: 'container' });
-
-    const stream = req.file.buffer ? require('streamifier').createReadStream(req.file.buffer) : req;
-    const fileName = req.file.originalname;
-    const mimeType = req.file.mimetype;
-
-    const blobUrl = await uploadToAzure(containerClient, stream, fileName, mimeType);
-
-    res.status(200).json({ url: blobUrl });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'File upload failed.' });
-  }
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
-
-const express = require('express');
-const multer = require('multer');
-const blobServiceClient = require('./blobService');
-const uploadToAzure = require('./uploadController');
-
-const app = express();
-const upload = multer();
-
-app.post('/upload', upload.single('file'), async (req, res) => {
-  try {
-    const containerClient = blobServiceClient.getContainerClient('my-container');
-
-    // Ensure the container exists
-    await containerClient.createIfNotExists({ access: 'container' });
-
-    const stream = req.file.buffer ? require('streamifier').createReadStream(req.file.buffer) : req;
-    const fileName = req.file.originalname;
-    const mimeType = req.file.mimetype;
-
-    const blobUrl = await uploadToAzure(containerClient, stream, fileName, mimeType);
-
-    res.status(200).json({ url: blobUrl });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'File upload failed.' });
-  }
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
-
-const { BlockBlobClient } = require('@azure/storage-blob');
-const path = require('path');
-const crypto = require('crypto');
-
-const uploadToAzure = async (containerClient, fileStream, fileName, mimeType) => {
-  const blobName = `${Date.now()}-${crypto.randomBytes(6).toString('hex')}-${fileName}`;
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-
-  const uploadOptions = {
-    blobHTTPHeaders: {
-      blobContentType: mimeType || 'application/octet-stream'
-    },
-    onProgress: (ev) => {
-      console.log(`Uploaded ${ev.loadedBytes} bytes`);
-    },
-    maxSingleShotSize: 4 * 1024 * 1024, // 4MB
-    concurrency: 5,
-  };
-
-  await blockBlobClient.uploadStream(
-    fileStream,
-    4 * 1024 * 1024, // buffer size
-    20, // max concurrency
-    uploadOptions
-  );
-
-  return blockBlobClient.url;
-};
-
-module.exports = uploadToAzure;
-
-
-
+export function cleanFields(data, keysToCheck) {
+  return data.map(item => {
+    const updatedItem = { ...item };
+    keysToCheck.forEach(key => {
+      const value = updatedItem[key];
+      if (
+        value === null ||
+        value === undefined ||
+        (typeof value === "object" && Object.keys(value).length === 0)
+      ) {
+        updatedItem[key] = "";
+      }
+    });
+    return updatedItem;
+  });
+}
