@@ -1,6 +1,7 @@
-// utils/cleanFields.js
-
-export function cleanFields(data, keysToCheck) {
+export function cleanFields<T extends Record<string, any>>(
+  data: T[],
+  keysToCheck: (keyof T)[]
+): T[] {
   return data.map(item => {
     const updatedItem = { ...item };
     keysToCheck.forEach(key => {
@@ -8,9 +9,9 @@ export function cleanFields(data, keysToCheck) {
       if (
         value === null ||
         value === undefined ||
-        (typeof value === "object" && Object.keys(value).length === 0)
+        (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0)
       ) {
-        updatedItem[key] = "";
+        updatedItem[key] = "" as any;
       }
     });
     return updatedItem;
