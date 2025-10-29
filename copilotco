@@ -1,0 +1,56 @@
+Slide 2: What is GitHub Copilot?
+	•	GitHub Copilot is an AI-powered coding assistant that helps developers write code faster and smarter.
+	•	It uses OpenAI’s models to understand what we’re trying to do and then suggests code, functions, or even entire files.
+	•	You can think of it as a pair programmer sitting beside you — helping you write, explain, and improve your code in real time.
+	•	It works with almost every major programming language and framework, and integrates smoothly with tools like VS Code, Visual Studio, JetBrains, and Neovim.
+	•	In short, Copilot helps us focus more on solving problems and less on typing repetitive code.
+
+⸻
+
+Slide 3: Why Copilot?
+	•	Copilot helps us focus on innovation rather than repetition.
+	•	Developers who use Copilot have reported higher job satisfaction, mainly because it makes coding more fun and less stressful.
+	•	Studies show that it can increase productivity by up to 55% — meaning we can build features faster without lowering code quality.
+	•	It encourages collaboration and learning, as we can ask Copilot to explain code we don’t understand or quickly generate examples.
+	•	Overall, it helps teams move faster, stay consistent, and deliver better software.
+
+⸻
+
+Slide 4: Core Capabilities
+
+Let’s look at what Copilot can actually do on a daily basis.
+	•	💬 Inline Chat
+You can literally chat with Copilot inside your editor — ask it to fix bugs, explain code, or even generate new functions in plain English.
+	•	📖 Code Explanation
+If you come across someone else’s code and can’t figure it out, Copilot can explain it line by line in simple language.
+	•	🧠 Context-Aware Code Suggestions
+Copilot doesn’t just suggest random code. It understands the context of your project and your current file to generate accurate, relevant code snippets.
+	•	🧩 Prompt to Code Generation
+You can write something like “create a REST API controller for users” — and Copilot will generate it for you instantly.
+	•	🧪 Test and Documentation Generation
+It can write unit tests for your functions and even generate basic documentation or comments automatically.
+	•	🔄 Refactoring Support
+When your code looks messy, Copilot can help clean it up — suggest better variable names, split long methods, and improve readability.
+	•	🐞 Debugging and Security Help
+It can point out potential bugs, missing validations, or even risky code that might lead to security issues.
+	•	⚙️ Code Review Assistance
+Copilot can act like a smart reviewer. It can analyze your pull requests, suggest improvements, and even catch common mistakes before you merge.
+	•	🧰 Slash Commands
+In the Copilot Chat, you can use commands like /tests, /docs, or /explain to perform quick actions such as generating test cases or adding documentation.
+	•	🌐 Multi-Language and Framework Support
+Whether you code in Python, C#, JavaScript, TypeScript, Java, Go, or even SQL, Copilot understands them all.
+	•	💻 Copilot in CLI
+You can use Copilot directly in the terminal. For example, ask it “How do I delete all local Git branches except main?” — and it gives you the exact command.
+	•	🔍 Learning and Brainstorming Help
+Sometimes, you just want to explore an idea or see how something can be done. Copilot can help brainstorm and generate quick prototypes too.
+
+In short, Copilot is not just an autocomplete tool — it’s like having an intelligent co-developer who’s available 24/7.
+
+⸻
+
+Slide 5: Impact
+	•	⚡ Faster Delivery: Developers spend less time on boilerplate and more time on logic — projects get completed much faster.
+	•	😊 Better Developer Experience: It reduces frustration, boosts confidence, and makes coding a lot more enjoyable.
+	•	🤝 Team Collaboration: It helps teams stay consistent in style and quality, and new team members can get up to speed faster.
+	•	📈 Business Impact: Companies using Copilot report faster release cycles, fewer bugs, and higher code maintainability.
+	•	💡 Continuous Learning: It helps developers learn new techniques and libraries while coding.
